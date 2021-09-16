@@ -70,6 +70,7 @@ public class ApplicationController {
             result.put("description", app.getDescription());
             result.put("title", app.getTitle());
             result.put("startDate", app.getStartDate());
+            result.put("user", app.getUser().getUserName());
             appObj.put(result);
         }
         return appObj.toString();

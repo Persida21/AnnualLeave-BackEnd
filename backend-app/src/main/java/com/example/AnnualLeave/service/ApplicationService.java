@@ -38,7 +38,7 @@ public class ApplicationService {
         User user = userService.findUserByUserName(application.optString("user"));
         newApplication.setUser(user);
         System.out.println("newApplication.toString()");
-        System.out.println(newApplication.toString());
+        System.out.println(user);
         mailSender.sendSimpleMessage("p.myftari12@gmail.com" , "New Application" , "Hello , a new application was added by " + user.getUserName());
         return applicationRepository.save(newApplication);
     }

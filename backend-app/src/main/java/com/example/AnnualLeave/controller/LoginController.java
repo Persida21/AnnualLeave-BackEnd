@@ -35,7 +35,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(path="/login" , produces = "application/json")
+    @RequestMapping(path = "/login", produces = "application/json")
     public String login(@RequestBody User user) throws JSONException {
         System.out.println(user.getUserName());
         JSONObject result = new JSONObject();
@@ -43,26 +43,24 @@ public class LoginController {
 
         // user does not exist
         if (existinguser == null) {
-            return result.toString();
+            return result.put("message", "Username not correct").toString();
         }
         if (userService.isValidPassword(existinguser, user.getPassword())) {
-            result.put("user" , user.getUserName() );
+            result.put("user", user.getUserName());
             Set<Role> roles = existinguser.getRoles();
 
             for (Role role : roles) {
                 System.out.println("role.getRole()");
                 System.out.println(role.getRole());
-                result.put("role" ,role.getRole() );
+                result.put("role", role.getRole());
             }
+            return result.toString();
         }
         System.out.println(result.toString());
-        return result.toString();
+        return result.put("message", "Password not correct").toString();
 
         //password not correct
     }
-
-
-
 
 
     @PostMapping(path = "/getRole", produces = "application/json")
